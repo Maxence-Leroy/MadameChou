@@ -1,16 +1,14 @@
-import { Tabs } from 'expo-router';
 import React from 'react';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import MadameChou from './madame-chou/madame-chou';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <Tabs
+    <MadameChou />
+    /*<Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
@@ -34,7 +32,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="madame-chou"
+        name="madame-chou/madame-chou"
         options= {{
           title: 'Madame Chou',
           tabBarIcon: ({color, focused}) => (
@@ -43,5 +41,6 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
+    */
   );
 }
