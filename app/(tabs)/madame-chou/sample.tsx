@@ -1,5 +1,6 @@
 import { ThemedText } from "@/components/ThemedText";
-import { ColorValue, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Button, ColorValue, View } from "react-native";
 
 type SampleProps = {
     id: number,
@@ -14,6 +15,13 @@ export default function Sample({
         throw new Error("Need 17 elements")
     }
     const samples: React.ReactElement[] = [];
+    const [showSamples, setShowSamples] = useState(false)
+
+    useEffect(() => {
+        if(!colors) {
+            setShowSamples(false)
+        }
+    }, [colors])
 
     if(colors) {
         for(let i = 0; i < colors.length; i++){
@@ -27,9 +35,12 @@ export default function Sample({
     return(
         <View style={{flexDirection: 'column', justifyContent: 'space-between', flex:1}}>
             <View style={{borderColor: '#54a8d6', borderWidth: 2,  flexGrow: 1, padding: 5}}>
-                { samples }
+                { showSamples && 
+                    (samples)
+                }
             </View>
             <ThemedText style={{alignSelf: 'center'}}>{id}</ThemedText>
+            <View style={{marginHorizontal: 5}}><Button title='On / Off' onPress={() => { if(colors) setShowSamples(!showSamples)}}/></View>
         </View>
     )
 }
