@@ -1,9 +1,9 @@
 import { ThemedText } from '@/components/ThemedText';
 import { useState, type Dispatch } from 'react';
-import { View } from 'react-native';
+import { Button, Platform, View } from 'react-native';
 import DropDownPicker, { ItemType, ValueType } from 'react-native-dropdown-picker';
 
-type SetStateCallback<S> = ((prevState: S) => S);
+export type SetStateCallback<S> = ((prevState: S) => S);
 
 type SampleSelectorProps<T> = {
     setValue: Dispatch<SetStateCallback<T | null>>,
@@ -21,7 +21,7 @@ export default function SampleSelector<T extends ValueType>(
     const [open, setOpen] = useState(false);
     return(
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <ThemedText style={{paddingRight: 10}}>{id}</ThemedText>
+            <ThemedText>{id}</ThemedText>
             <DropDownPicker
                 open={open}
                 value={value}
@@ -29,9 +29,20 @@ export default function SampleSelector<T extends ValueType>(
                 setOpen={setOpen}
                 setValue={setValue}
                 placeholder={"Choisir un échantillon"}
-                style={{zIndex: -1}}
+                containerStyle={{
+                    paddingHorizontal: 10,
+                    paddingVertical: 2,
+                    flex: 1,
+                }}
                 dropDownDirection='AUTO'
                 bottomOffset={400}
+                zIndex={(6 - id) * 1000}
+                zIndexInverse={id * 1000}
+                listMode= {Platform.OS === 'android' ? 'MODAL' : 'DEFAULT'}
+            />
+            <Button
+                title='Effacer'
+                onPress={() => {setValue(null)}}
             />
         </View>
     )
