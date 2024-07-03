@@ -1,6 +1,7 @@
 import { ThemedText } from "@/components/ThemedText";
 import { useEffect, useState } from "react";
-import { Button, ColorValue, View } from "react-native";
+import { Animated, Button, ColorValue, View } from "react-native";
+import AnimatedSample from "./animated-sample";
 
 type SampleProps = {
     id: number,
@@ -16,6 +17,7 @@ export default function Sample({
     }
     const samples: React.ReactElement[] = [];
     const [showSamples, setShowSamples] = useState(false)
+    const [height, setHeight] = useState(0)
 
     useEffect(() => {
         if(!colors) {
@@ -23,18 +25,18 @@ export default function Sample({
         }
     }, [colors])
 
-    if(colors) {
+    if(colors && showSamples) {
         for(let i = 0; i < colors.length; i++){
             const color = colors[i];
             samples.push(
-                <View style={{flex: 1, backgroundColor: color, marginVertical: 2}} />
+                <AnimatedSample containerHeight={height} color={color} index={i} numberOfColors={colors.length} />
             )
         }
     }
 
     return(
         <View style={{flexDirection: 'column', justifyContent: 'space-between', flex:1}}>
-            <View style={{borderColor: '#54a8d6', borderWidth: 2,  flexGrow: 1, padding: 5}}>
+            <View style={{borderColor: '#54a8d6', borderWidth: 2,  flexGrow: 1, padding: 5, justifyContent: 'space-between'}} onLayout={(event) => {setHeight(event.nativeEvent.layout.height)}}>
                 { showSamples && 
                     (samples)
                 }
