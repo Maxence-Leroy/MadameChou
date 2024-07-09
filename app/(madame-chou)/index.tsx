@@ -1,10 +1,11 @@
-import { ColorValue, Dimensions, Platform, Pressable, SafeAreaView, StatusBar, View, Text } from "react-native";
+import { ColorValue, Dimensions, Platform, Pressable, SafeAreaView, StatusBar, View, Text, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import * as ScreenOrientation from 'expo-screen-orientation';
 import IntroductionAndSelection from "./introduction-and-selection";
 import SampleComparaison from "./sample-comparaison";
 import { dnaSamples } from "./colors";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import PasswordModal from "./password-modal";
 import { router } from "expo-router";
 
 function isOrientationPortrait(orientation: ScreenOrientation.Orientation): Boolean {
@@ -13,6 +14,7 @@ function isOrientationPortrait(orientation: ScreenOrientation.Orientation): Bool
 
 
 export default function MadameChou() {
+    const [modalVisible, setModalVisible] = useState(false);
     const [sample1, setSample1] = useState<ColorValue[] | null>(null);
     const [sample2, setSample2] = useState<ColorValue[] | null>(null);
     const [sample3, setSample3] = useState<ColorValue[] | null>(null);
@@ -30,13 +32,20 @@ export default function MadameChou() {
     })
 
     const items = dnaSamples;
-    const buttonSize = 40
+    const buttonSize = 30
     return (
         <SafeAreaView style={{flex: 1, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0}}>
-            <Pressable onPress={() => { router.navigate("/culprit-setting/")}}
-                style={{height: buttonSize, width: buttonSize, backgroundColor: '#2196F3', justifyContent: 'center', alignItems: 'center', borderRadius: buttonSize}}>
-                    <Ionicons name="settings" size={32} color="white" />
-            </Pressable>
+            <PasswordModal 
+                isVisible={modalVisible} 
+                closeModal={() => { setModalVisible(false) }} 
+                onSuccess={() => { router.navigate("/culprit-setting") }}                
+            />
+            <TouchableOpacity onPress={() => { 
+                setModalVisible(true)
+            }}
+                style={{height: buttonSize, width: buttonSize, backgroundColor: '#2196F3', justifyContent: 'center', alignItems: 'center', borderRadius: buttonSize, zIndex: 1000}}>
+                    <Ionicons name="settings" size={0.6*buttonSize} color="white" />
+            </TouchableOpacity>
             <View style={{flexDirection: isOrientationPortrait(orientation) ? 'column' : 'row', flex: 1, marginTop: -buttonSize }}>
                 <IntroductionAndSelection
                     sample1={sample1}
