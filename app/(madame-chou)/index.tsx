@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import * as ScreenOrientation from 'expo-screen-orientation';
 import IntroductionAndSelection from "./introduction-and-selection";
 import SampleComparaison from "./sample-comparaison";
-import { AllSamples, Character, SalivaSample } from "../state";
+import { AllSamples, Character, victim, PotentialSuspects, SalivaSample } from "../state";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import PasswordModal from "./password-modal";
 import { router } from "expo-router";
@@ -31,8 +31,8 @@ export default function MadameChou() {
     ScreenOrientation.addOrientationChangeListener((event: ScreenOrientation.OrientationChangeEvent) => {
         setOrientation(event.orientationInfo.orientation)
     })
-
-    const characterItems: ItemType<AllSamples>[] = Object.values(Character).map((character) => { return {label: "ADN de " + character, value: character}});
+    const characters: Character[] = [victim].concat(Object.values(PotentialSuspects))
+    const characterItems: ItemType<AllSamples>[] = characters.map((character) => { return {label: "ADN de " + character, value: character}});
     const salivaItems: ItemType<AllSamples>[] = Object.values(SalivaSample).map((saliva) => { return {label: saliva, value: saliva}});
     const items: ItemType<AllSamples>[] = salivaItems.concat(characterItems);
     const buttonSize = 30
@@ -41,7 +41,15 @@ export default function MadameChou() {
             <PasswordModal 
                 isVisible={modalVisible} 
                 closeModal={() => { setModalVisible(false) }} 
-                onSuccess={() => { router.navigate("/culprit-setting") }}                
+                onSuccess={() => { 
+                    setSample1(null);
+                    setSample2(null);
+                    setSample3(null);
+                    setSample4(null);
+                    setSample5(null);
+                    setSample6(null);
+                    router.navigate("/culprit-setting")
+                }}                
             />
             <TouchableOpacity onPress={() => { 
                 setModalVisible(true)

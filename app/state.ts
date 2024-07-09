@@ -13,13 +13,17 @@ export enum CharacterType {
     Innocent1 = "innocent1",
     Innocent2 = "innocent2"
 };
-export enum Character {
-    Chou = "Madame Chou-Fleur",
+
+export enum PotentialSuspects {
     Banane = "Madame Banane",
     Kiwi = "Monsieur Kiwi",
     Oignon = "Monsieur Oignon",
     Foie = "Monsieur Foie"
 }
+
+export type Character = "Madame Chou-Fleur" | PotentialSuspects;
+
+export const victim: Character = "Madame Chou-Fleur";
 
 export enum SalivaSample {
     One = "Échantillon salive verre n°1",
@@ -47,11 +51,11 @@ const dnaAttribution = new Map<CharacterType, DNASample>([
 ]);
 
 const defaultSampleAttribution = new Map<Character, CharacterType>([
-    [Character.Chou, CharacterType.Victim],
-    [Character.Banane, CharacterType.Innocent0],
-    [Character.Foie, CharacterType.Culprit],
-    [Character.Kiwi, CharacterType.Innocent1],
-    [Character.Oignon, CharacterType.Innocent2]
+    [victim, CharacterType.Victim],
+    [PotentialSuspects.Banane, CharacterType.Innocent0],
+    [PotentialSuspects.Foie, CharacterType.Culprit],
+    [PotentialSuspects.Kiwi, CharacterType.Innocent1],
+    [PotentialSuspects.Oignon, CharacterType.Innocent2]
 ])
 
 export const typeAttributionState = atom<Map<Character, CharacterType>>({
