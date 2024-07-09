@@ -2,10 +2,11 @@ import { ThemedText } from "@/components/ThemedText";
 import { useEffect, useState } from "react";
 import { Animated, Button, ColorValue, View } from "react-native";
 import AnimatedSample from "./animated-sample";
+import { DNASample } from "../state";
 
 type SampleProps = {
     id: number,
-    colors: ColorValue[] | null
+    colors: DNASample | undefined
 }
 
 export default function Sample({

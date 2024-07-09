@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { RecoilRoot } from 'recoil';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -28,12 +29,14 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(madame-chou)/index" options={{ headerShown: false }} />
-        <Stack.Screen name="culprit-setting/index" options={{ headerShown: true, headerTitle: 'Sélection du coupable' }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <RecoilRoot>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="(madame-chou)/index" options={{ headerShown: false }} />
+          <Stack.Screen name="culprit-setting/index" options={{ headerShown: true, headerTitle: 'Sélection du coupable' }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+      </ThemeProvider>
+    </RecoilRoot>
   );
 }

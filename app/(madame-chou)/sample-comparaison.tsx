@@ -1,14 +1,16 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ColorValue, View } from "react-native";
 import Sample from "./sample";
+import { AllSamples, dnaAttributionState, DNASample } from "../state";
+import { useRecoilValue } from "recoil";
 
 type SampleComparaisonProps = {
-    sample1: ColorValue[] | null,
-    sample2: ColorValue[] | null,
-    sample3: ColorValue[] | null,
-    sample4: ColorValue[] | null,
-    sample5: ColorValue[] | null,
-    sample6: ColorValue[] | null,
+    sample1: AllSamples | null,
+    sample2: AllSamples | null,
+    sample3: AllSamples | null,
+    sample4: AllSamples | null,
+    sample5: AllSamples | null,
+    sample6: AllSamples | null,
 }
 
 export default function SampleComparaison({
@@ -19,14 +21,20 @@ export default function SampleComparaison({
     sample5,
     sample6
 }: SampleComparaisonProps) {
+    const dna = useRecoilValue(dnaAttributionState);
+    function getDna(sample: AllSamples | null): DNASample | undefined {
+        if(!sample) return undefined;
+
+        return dna.get(sample);
+    }
     return(
         <View style={{flexDirection: 'row', alignItems: 'stretch', flexGrow: 1}}>
-            <Sample id={1} colors={sample1} />
-            <Sample id={2} colors={sample2} />
-            <Sample id={3} colors={sample3} />
-            <Sample id={4} colors={sample4} />
-            <Sample id={5} colors={sample5} />
-            <Sample id={6} colors={sample6} />
+            <Sample id={1} colors={getDna(sample1)} />
+            <Sample id={2} colors={getDna(sample2)} />
+            <Sample id={3} colors={getDna(sample3)} />
+            <Sample id={4} colors={getDna(sample4)} />
+            <Sample id={5} colors={getDna(sample5)} />
+            <Sample id={6} colors={getDna(sample6)} />
         </View>
     )
 }

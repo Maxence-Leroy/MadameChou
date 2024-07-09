@@ -3,22 +3,23 @@ import { ColorValue, Image, View } from "react-native";
 import SampleSelector, { SetStateCallback } from "./sample-selector";
 import { Dispatch } from "react";
 import { ItemType, ValueType } from "react-native-dropdown-picker";
+import { AllSamples } from "../state";
 
 
-type IntroductionAndSelectionProps<T> = {
-    sample1: T | null,
-    sample2: T | null,
-    sample3: T | null,
-    sample4: T | null,
-    sample5: T | null,
-    sample6: T | null,
-    setSample1: Dispatch<SetStateCallback<T | null>>,
-    setSample2: Dispatch<SetStateCallback<T | null>>,
-    setSample3: Dispatch<SetStateCallback<T | null>>,
-    setSample4: Dispatch<SetStateCallback<T | null>>,
-    setSample5: Dispatch<SetStateCallback<T | null>>,
-    setSample6: Dispatch<SetStateCallback<T | null>>,
-    items: ItemType<T>[]
+type IntroductionAndSelectionProps = {
+    sample1: AllSamples | null,
+    sample2: AllSamples | null,
+    sample3: AllSamples | null,
+    sample4: AllSamples | null,
+    sample5: AllSamples | null,
+    sample6: AllSamples | null,
+    setSample1: Dispatch<SetStateCallback<AllSamples | null>>,
+    setSample2: Dispatch<SetStateCallback<AllSamples | null>>,
+    setSample3: Dispatch<SetStateCallback<AllSamples | null>>,
+    setSample4: Dispatch<SetStateCallback<AllSamples | null>>,
+    setSample5: Dispatch<SetStateCallback<AllSamples | null>>,
+    setSample6: Dispatch<SetStateCallback<AllSamples | null>>,
+    items: ItemType<AllSamples>[]
 }
 
 
@@ -36,7 +37,7 @@ export default function IntroductionAndSelection({
     setSample5,
     setSample6,
     items
-}: IntroductionAndSelectionProps<ColorValue[]>) {
+}: IntroductionAndSelectionProps) {
     return (
         <View style={{flexDirection: 'column', justifyContent: 'space-between'}}>
             <View style={{flexDirection: 'column', alignItems: 'center'}}>

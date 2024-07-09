@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import * as ScreenOrientation from 'expo-screen-orientation';
 import IntroductionAndSelection from "./introduction-and-selection";
 import SampleComparaison from "./sample-comparaison";
-import { dnaSamples } from "./colors";
+import { AllSamples, Character, SalivaSample } from "../state";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import PasswordModal from "./password-modal";
 import { router } from "expo-router";
+import { ItemType } from "react-native-dropdown-picker";
 
 function isOrientationPortrait(orientation: ScreenOrientation.Orientation): Boolean {
     return orientation === ScreenOrientation.Orientation.PORTRAIT_DOWN || orientation === ScreenOrientation.Orientation.PORTRAIT_UP
@@ -15,12 +16,12 @@ function isOrientationPortrait(orientation: ScreenOrientation.Orientation): Bool
 
 export default function MadameChou() {
     const [modalVisible, setModalVisible] = useState(false);
-    const [sample1, setSample1] = useState<ColorValue[] | null>(null);
-    const [sample2, setSample2] = useState<ColorValue[] | null>(null);
-    const [sample3, setSample3] = useState<ColorValue[] | null>(null);
-    const [sample4, setSample4] = useState<ColorValue[] | null>(null);
-    const [sample5, setSample5] = useState<ColorValue[] | null>(null);
-    const [sample6, setSample6] = useState<ColorValue[] | null>(null);
+    const [sample1, setSample1] = useState<AllSamples | null>(null);
+    const [sample2, setSample2] = useState<AllSamples | null>(null);
+    const [sample3, setSample3] = useState<AllSamples | null>(null);
+    const [sample4, setSample4] = useState<AllSamples | null>(null);
+    const [sample5, setSample5] = useState<AllSamples | null>(null);
+    const [sample6, setSample6] = useState<AllSamples | null>(null);
     const [orientation, setOrientation] = useState(ScreenOrientation.Orientation.UNKNOWN);
     useEffect(() => {
         ScreenOrientation.getOrientationAsync().then((currentOrientation) => {
@@ -31,7 +32,9 @@ export default function MadameChou() {
         setOrientation(event.orientationInfo.orientation)
     })
 
-    const items = dnaSamples;
+    const characterItems: ItemType<AllSamples>[] = Object.values(Character).map((character) => { return {label: "ADN de " + character, value: character}});
+    const salivaItems: ItemType<AllSamples>[] = Object.values(SalivaSample).map((saliva) => { return {label: saliva, value: saliva}});
+    const items: ItemType<AllSamples>[] = salivaItems.concat(characterItems);
     const buttonSize = 30
     return (
         <SafeAreaView style={{flex: 1, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0}}>
