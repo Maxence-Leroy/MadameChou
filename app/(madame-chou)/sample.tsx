@@ -29,7 +29,7 @@ export default function Sample({
         for(let i = 0; i < colors.length; i++){
             const color = colors[i];
             samples.push(
-                <AnimatedSample containerHeight={height} color={color} index={i} numberOfColors={colors.length} />
+                <AnimatedSample key={i} containerHeight={height} color={color} index={i} numberOfColors={colors.length} />
             )
         }
     }

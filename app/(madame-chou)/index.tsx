@@ -1,8 +1,6 @@
-import { ColorValue, Image, Platform, SafeAreaView, StatusBar, View } from "react-native";
-import { ThemedText } from '@/components/ThemedText';
+import { ColorValue, Platform, SafeAreaView, StatusBar } from "react-native";
 import { useEffect, useState } from "react";
 import * as ScreenOrientation from 'expo-screen-orientation';
-import SampleSelector from "./sample-selector";
 import IntroductionAndSelection from "./introduction-and-selection";
 import SampleComparaison from "./sample-comparaison";
 import { dnaSamples } from "./colors";
