@@ -26,6 +26,7 @@ export default function PasswordModal({
     const [text, setText] = useState("");
     useEffect(() => {
         setText("")
+        setHasError(false)
     }, [isVisible]);
     const [hasError, setHasError] = useState(false);
 

@@ -37,7 +37,7 @@ export type DNASample = ColorValue[];
 const victimDna: DNASample = [dark, empty, light, empty, light, empty, dark, dark, empty, medium, empty, dark, dark, empty, dark, medium, dark]
 const culpritDna: DNASample = [dark, dark, dark, medium, medium, light, empty, empty, empty, empty, dark, dark, empty, light, empty, light, medium]
 const otherCharactersDna: DNASample[] = [
-    [dark, empty, light, empty, light, empty, dark, dark, empty, medium, empty, dark, dark, empty, dark, medium, dark],
+    [medium, dark, light, medium, empty, dark, dark, empty, empty, empty, empty, light, empty, empty, empty, dark, dark],
     [light, medium, light, medium, empty, empty, empty, empty, empty, empty, light, dark, dark, empty, light, medium, light],
     [light, empty, light, empty, light, dark, light, medium, light, light, dark, dark, medium, empty, medium, light, light]
 ]
