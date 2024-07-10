@@ -49,9 +49,9 @@ export default function CulpritSetting() {
                     let i = 0
                     for (const character of Object.values(PotentialSuspects)) {
                         if(character !== value) {
-                            if(i === 0) newAttribution.set(character, CharacterType.Innocent0);
-                            else if(i === 1) newAttribution.set(character, CharacterType.Innocent1);
-                            else if(i === 2) newAttribution.set(character, CharacterType.Innocent2);
+                            if(i === 0) newAttribution.set(character, CharacterType.Innocent);
+                            else if(i === 1) newAttribution.set(character, CharacterType.Innocent);
+                            else if(i === 2) newAttribution.set(character, CharacterType.Innocent);
                             i += 1;
                         }
                     }

@@ -9,9 +9,7 @@ const empty = '#ffffff00';
 export enum CharacterType {
     Victim = "victim",
     Culprit = "culprit",
-    Innocent0 = "innocent0",
-    Innocent1 = "innocent1",
-    Innocent2 = "innocent2"
+    Innocent = "innocent",
 };
 
 export enum PotentialSuspects {
@@ -42,20 +40,12 @@ const otherCharactersDna: DNASample[] = [
     [light, empty, light, empty, light, dark, light, medium, light, light, dark, dark, medium, empty, medium, light, light]
 ]
 
-const dnaAttribution = new Map<CharacterType, DNASample>([
-    [CharacterType.Victim, victimDna],
-    [CharacterType.Culprit, culpritDna],
-    [CharacterType.Innocent0, otherCharactersDna[0]],
-    [CharacterType.Innocent1, otherCharactersDna[1]],
-    [CharacterType.Innocent2, otherCharactersDna[2]]
-]);
-
 const defaultSampleAttribution = new Map<Character, CharacterType>([
     [victim, CharacterType.Victim],
-    [PotentialSuspects.Banane, CharacterType.Innocent0],
+    [PotentialSuspects.Banane, CharacterType.Innocent],
     [PotentialSuspects.Foie, CharacterType.Culprit],
-    [PotentialSuspects.Kiwi, CharacterType.Innocent1],
-    [PotentialSuspects.Oignon, CharacterType.Innocent2]
+    [PotentialSuspects.Kiwi, CharacterType.Innocent],
+    [PotentialSuspects.Oignon, CharacterType.Innocent]
 ])
 
 export const typeAttributionState = atom<Map<Character, CharacterType>>({
@@ -67,11 +57,20 @@ export const dnaAttributionState = selector<Map<AllSamples, DNASample>>({
     key: 'dnaAttribution',
     get: ({get}) => {
         const currentTypeAttribution = get(typeAttributionState);
+        let innoncentNumber = 0;
         let map = new Map<AllSamples, DNASample>();
         currentTypeAttribution.forEach((value, key, _) => {
-            const attribution = dnaAttribution.get(value)
-            if(!!attribution) {
-                map.set(key, attribution)
+            switch(value) {
+                case CharacterType.Victim:
+                    map.set(key, victimDna)
+                    break
+                case CharacterType.Culprit:
+                    map.set(key, culpritDna)
+                    break
+                case CharacterType.Innocent:
+                    map.set(key, otherCharactersDna[innoncentNumber])
+                    innoncentNumber += 1
+                    break
             }
         })
         map.set(SalivaSample.One, victimDna);

@@ -1,12 +1,10 @@
 import { ThemedText } from '@/components/ThemedText';
-import { useState, type Dispatch } from 'react';
+import { SetStateAction, useState, type Dispatch } from 'react';
 import { Button, Platform, View } from 'react-native';
 import DropDownPicker, { ItemType, ValueType } from 'react-native-dropdown-picker';
 
-export type SetStateCallback<S> = ((prevState: S) => S);
-
 type SampleSelectorProps<T> = {
-    setValue: Dispatch<SetStateCallback<T | null>>,
+    setValue: Dispatch<SetStateAction<T | null>>,
     value: T | null,
     items: ItemType<T>[],
     id: number

@@ -1,7 +1,7 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ColorValue, Image, View } from "react-native";
-import SampleSelector, { SetStateCallback } from "./sample-selector";
-import { Dispatch } from "react";
+import SampleSelector from "./sample-selector";
+import { Dispatch, SetStateAction } from "react";
 import { ItemType, ValueType } from "react-native-dropdown-picker";
 import { AllSamples } from "../state";
 
@@ -13,12 +13,12 @@ type IntroductionAndSelectionProps = {
     sample4: AllSamples | null,
     sample5: AllSamples | null,
     sample6: AllSamples | null,
-    setSample1: Dispatch<SetStateCallback<AllSamples | null>>,
-    setSample2: Dispatch<SetStateCallback<AllSamples | null>>,
-    setSample3: Dispatch<SetStateCallback<AllSamples | null>>,
-    setSample4: Dispatch<SetStateCallback<AllSamples | null>>,
-    setSample5: Dispatch<SetStateCallback<AllSamples | null>>,
-    setSample6: Dispatch<SetStateCallback<AllSamples | null>>,
+    setSample1: Dispatch<SetStateAction<AllSamples | null>>,
+    setSample2: Dispatch<SetStateAction<AllSamples | null>>,
+    setSample3: Dispatch<SetStateAction<AllSamples | null>>,
+    setSample4: Dispatch<SetStateAction<AllSamples | null>>,
+    setSample5: Dispatch<SetStateAction<AllSamples | null>>,
+    setSample6: Dispatch<SetStateAction<AllSamples | null>>,
     items: ItemType<AllSamples>[]
 }
 
