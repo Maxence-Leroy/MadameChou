@@ -1,4 +1,4 @@
-import { Platform, SafeAreaView, StatusBar, View, TouchableOpacity } from "react-native";
+import { Platform, SafeAreaView, StatusBar, View, Pressable } from "react-native";
 import { useEffect, useState } from "react";
 import * as ScreenOrientation from 'expo-screen-orientation';
 import IntroductionAndSelection from "./introduction-and-selection";
@@ -8,6 +8,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import PasswordModal from "./password-modal";
 import { router } from "expo-router";
 import { ItemType } from "react-native-dropdown-picker";
+import { ThemeProvider } from "@react-navigation/native";
+import { ThemedView } from "@/components/ThemedView";
 
 function isOrientationPortrait(orientation: ScreenOrientation.Orientation): Boolean {
     return orientation === ScreenOrientation.Orientation.PORTRAIT_DOWN || orientation === ScreenOrientation.Orientation.PORTRAIT_UP
@@ -37,51 +39,61 @@ export default function MadameChou() {
     const items: ItemType<AllSamples>[] = salivaItems.concat(characterItems);
     const buttonSize = 30
     return (
-        <SafeAreaView style={{flex: 1, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0}}>
-            <PasswordModal 
-                isVisible={modalVisible} 
-                closeModal={() => { setModalVisible(false) }} 
-                onSuccess={() => { 
-                    setSample1(null);
-                    setSample2(null);
-                    setSample3(null);
-                    setSample4(null);
-                    setSample5(null);
-                    setSample6(null);
-                    router.navigate("/culprit-setting")
-                }}                
-            />
-            <TouchableOpacity onPress={() => { 
-                setModalVisible(true)
-            }}
-                style={{height: buttonSize, width: buttonSize, backgroundColor: '#2196F3', justifyContent: 'center', alignItems: 'center', borderRadius: buttonSize, zIndex: 1000}}>
-                    <Ionicons name="settings" size={0.6*buttonSize} color="white" />
-            </TouchableOpacity>
-            <View style={{flexDirection: isOrientationPortrait(orientation) ? 'column' : 'row', flex: 1, marginTop: -buttonSize }}>
-                <IntroductionAndSelection
-                    sample1={sample1}
-                    sample2={sample2}
-                    sample3={sample3}
-                    sample4={sample4}
-                    sample5={sample5}
-                    sample6={sample6}
-                    setSample1={setSample1}
-                    setSample2={setSample2}
-                    setSample3={setSample3}
-                    setSample4={setSample4}
-                    setSample5={setSample5}
-                    setSample6={setSample6}
-                    items={items}
+        <ThemedView style={{flex:1}}>
+            <View style={{flex: 1, paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0, margin: Platform.OS !== "android" && Platform.OS !== "ios" ? 10 : 0}}>
+                <PasswordModal 
+                    isVisible={modalVisible} 
+                    closeModal={() => { setModalVisible(false) }} 
+                    onSuccess={() => { 
+                        setSample1(null);
+                        setSample2(null);
+                        setSample3(null);
+                        setSample4(null);
+                        setSample5(null);
+                        setSample6(null);
+                        router.navigate("/culprit-setting")
+                    }}                
                 />
-                <SampleComparaison
-                    sample1={sample1}
-                    sample2={sample2}
-                    sample3={sample3}
-                    sample4={sample4}
-                    sample5={sample5}
-                    sample6={sample6}
-                />
+                <Pressable onPress={() => { 
+                    setModalVisible(true)
+                }}
+                    style={{height: buttonSize, width: buttonSize, backgroundColor: '#2196F3', justifyContent: 'center', alignItems: 'center', borderRadius: buttonSize, zIndex: 1000}}>
+                        <Ionicons name="settings" size={0.6*buttonSize} color="white" />
+                </Pressable>
+                <View style={{flexDirection: isOrientationPortrait(orientation) ? 'column' : 'row', flex: 1, marginTop: -buttonSize }}>
+                    <IntroductionAndSelection
+                        sample1={sample1}
+                        sample2={sample2}
+                        sample3={sample3}
+                        sample4={sample4}
+                        sample5={sample5}
+                        sample6={sample6}
+                        setSample1={setSample1}
+                        setSample2={setSample2}
+                        setSample3={setSample3}
+                        setSample4={setSample4}
+                        setSample5={setSample5}
+                        setSample6={setSample6}
+                        items={items}
+                        style={{
+                            paddingRight: isOrientationPortrait(orientation) ? 0 : 20,
+                            flex: isOrientationPortrait(orientation) ? undefined : 2 
+                        }}
+                    />
+                    <SampleComparaison
+                        sample1={sample1}
+                        sample2={sample2}
+                        sample3={sample3}
+                        sample4={sample4}
+                        sample5={sample5}
+                        sample6={sample6}
+                        style={{
+                            paddingRight: isOrientationPortrait(orientation) ? 0 : 20,
+                            flex: isOrientationPortrait(orientation) ? undefined : 3 
+                        }}
+                    />
+                </View>
             </View>
-        </SafeAreaView>
+        </ThemedView>
     )
 }

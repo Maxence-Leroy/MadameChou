@@ -6,6 +6,8 @@ const medium = '#1e4c94';
 const light = '#a4cdea';
 const empty = '#ffffff00';
 
+export const NUMBER_OF_ELEMENTS = 17;
+
 export enum CharacterType {
     Victim = "victim",
     Culprit = "culprit",

@@ -33,10 +33,10 @@ export default function SampleSelector<T extends ValueType>(
                     flex: 1,
                 }}
                 dropDownDirection='AUTO'
-                bottomOffset={400}
+                bottomOffset={100}
                 zIndex={(6 - id) * 1000}
                 zIndexInverse={id * 1000}
-                listMode= {Platform.OS === 'android' ? 'MODAL' : 'DEFAULT'}
+                listMode= {Platform.OS === 'android' ? 'MODAL' : 'FLATLIST'}
             />
             <Button
                 title='Effacer'

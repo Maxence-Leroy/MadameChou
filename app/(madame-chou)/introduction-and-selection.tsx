@@ -1,5 +1,5 @@
 import { ThemedText } from "@/components/ThemedText";
-import { Image, View } from "react-native";
+import { Image, View, ViewStyle } from "react-native";
 import SampleSelector from "./sample-selector";
 import { Dispatch, SetStateAction } from "react";
 import { ItemType } from "react-native-dropdown-picker";
@@ -19,7 +19,8 @@ type IntroductionAndSelectionProps = {
     setSample4: Dispatch<SetStateAction<AllSamples | null>>,
     setSample5: Dispatch<SetStateAction<AllSamples | null>>,
     setSample6: Dispatch<SetStateAction<AllSamples | null>>,
-    items: ItemType<AllSamples>[]
+    items: ItemType<AllSamples>[],
+    style: ViewStyle
 }
 
 
@@ -36,10 +37,11 @@ export default function IntroductionAndSelection({
     setSample4,
     setSample5,
     setSample6,
-    items
+    items,
+    style
 }: IntroductionAndSelectionProps) {
     return (
-        <View style={{flexDirection: 'column', justifyContent: 'space-between'}}>
+        <View style={{...style, ...{flexDirection: 'column', justifyContent: 'space-between'}}}>
             <View style={{flexDirection: 'column', alignItems: 'center'}}>
                 <ThemedText>Meurtre de Madame Chou-Fleur</ThemedText>
                 <ThemedText>Empreintes ADN Electrophorèse</ThemedText>

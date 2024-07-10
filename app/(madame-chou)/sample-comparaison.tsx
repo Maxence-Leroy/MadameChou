@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, ViewStyle } from "react-native";
 import Sample from "./sample";
 import { AllSamples, dnaAttributionState, DNASample } from "../state";
 import { useRecoilValue } from "recoil";
@@ -10,6 +10,7 @@ type SampleComparaisonProps = {
     sample4: AllSamples | null,
     sample5: AllSamples | null,
     sample6: AllSamples | null,
+    style: ViewStyle
 }
 
 export default function SampleComparaison({
@@ -18,7 +19,8 @@ export default function SampleComparaison({
     sample3,
     sample4,
     sample5,
-    sample6
+    sample6,
+    style
 }: SampleComparaisonProps) {
     const dna = useRecoilValue(dnaAttributionState);
     function getDna(sample: AllSamples | null): DNASample | undefined {
@@ -27,7 +29,7 @@ export default function SampleComparaison({
         return dna.get(sample);
     }
     return(
-        <View style={{flexDirection: 'row', alignItems: 'stretch', flexGrow: 1}}>
+        <View style={{...style, ...{flexDirection: 'row', alignItems: 'stretch', flexGrow: 3}}}>
             <Sample id={1} colors={getDna(sample1)} />
             <Sample id={2} colors={getDna(sample2)} />
             <Sample id={3} colors={getDna(sample3)} />

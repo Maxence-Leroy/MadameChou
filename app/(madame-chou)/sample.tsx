@@ -2,7 +2,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { useEffect, useState } from "react";
 import { Button, View } from "react-native";
 import AnimatedSample from "./animated-sample";
-import { DNASample } from "../state";
+import { DNASample, NUMBER_OF_ELEMENTS } from "../state";
 
 type SampleProps = {
     id: number,
@@ -13,8 +13,8 @@ export default function Sample({
     id,
     colors
 }: SampleProps) {
-    if(colors && colors.length != 17) {
-        throw new Error("Need 17 elements")
+    if(colors && colors.length != NUMBER_OF_ELEMENTS) {
+        throw new Error(`Need ${NUMBER_OF_ELEMENTS} elements`)
     }
     const samples: React.ReactElement[] = [];
     const [showSamples, setShowSamples] = useState(false)
@@ -30,7 +30,7 @@ export default function Sample({
         for(let i = 0; i < colors.length; i++){
             const color = colors[i];
             samples.push(
-                <AnimatedSample key={i} containerHeight={height} color={color} index={i} numberOfColors={colors.length} />
+                <AnimatedSample key={i} containerHeight={height} color={color} index={i} />
             )
         }
     }
