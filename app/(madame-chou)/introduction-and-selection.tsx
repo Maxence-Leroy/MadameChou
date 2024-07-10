@@ -1,8 +1,8 @@
 import { ThemedText } from "@/components/ThemedText";
-import { ColorValue, Image, View } from "react-native";
+import { Image, View } from "react-native";
 import SampleSelector from "./sample-selector";
 import { Dispatch, SetStateAction } from "react";
-import { ItemType, ValueType } from "react-native-dropdown-picker";
+import { ItemType } from "react-native-dropdown-picker";
 import { AllSamples } from "../state";
 
 

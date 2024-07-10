@@ -1,4 +1,4 @@
-import { ColorValue, Dimensions, Platform, Pressable, SafeAreaView, StatusBar, View, Text, TouchableOpacity } from "react-native";
+import { Platform, SafeAreaView, StatusBar, View, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import * as ScreenOrientation from 'expo-screen-orientation';
 import IntroductionAndSelection from "./introduction-and-selection";

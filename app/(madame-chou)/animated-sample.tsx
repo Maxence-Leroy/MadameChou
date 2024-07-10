@@ -1,4 +1,3 @@
-import { ThemedText } from "@/components/ThemedText";
 import { ColorValue, View } from "react-native"
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 

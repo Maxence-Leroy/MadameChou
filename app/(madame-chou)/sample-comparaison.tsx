@@ -1,5 +1,4 @@
-import { ThemedText } from "@/components/ThemedText";
-import { ColorValue, View } from "react-native";
+import { View } from "react-native";
 import Sample from "./sample";
 import { AllSamples, dnaAttributionState, DNASample } from "../state";
 import { useRecoilValue } from "recoil";

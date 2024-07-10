@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/ThemedText";
 import { useEffect, useState } from "react";
-import { Animated, Button, ColorValue, View } from "react-native";
+import { Button, View } from "react-native";
 import AnimatedSample from "./animated-sample";
 import { DNASample } from "../state";
 

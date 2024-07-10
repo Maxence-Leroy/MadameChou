@@ -1,7 +1,7 @@
 import { ThemedText } from "@/components/ThemedText";
 import { useEffect, useState } from "react";
 import { Button, Platform, View } from "react-native";
-import DropDownPicker, { ItemType, ValueType } from "react-native-dropdown-picker";
+import DropDownPicker, { ItemType } from "react-native-dropdown-picker";
 import { Character, CharacterType, PotentialSuspects, typeAttributionState, victim } from "../state";
 import { useRecoilState } from "recoil";
 import { router } from "expo-router";
